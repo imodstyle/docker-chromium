@@ -13,7 +13,7 @@ RUN gcc -static -o membarrier_check membarrier_check.c
 RUN strip membarrier_check
 
 # Pull base image.
-FROM imodstyle/baseimage-gui:alpine-3.18.3-v4.4.3
+FROM imodstyle/baseimage-gui:alpine-3.18-v4.4.2
 
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
