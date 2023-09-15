@@ -68,7 +68,7 @@ RUN \
 
 # Generate and install favicons.
 RUN \
-    APP_ICON_URL=https://raw.githubusercontent.com/imodstyle/docker-chromium/master/img/chromium-icon.png && \
+    APP_ICON_URL=https://raw.githubusercontent.com/imodstyle/docker-chromium/main/img/chromium_icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
