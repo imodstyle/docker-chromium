@@ -7,7 +7,7 @@ installation or configuration needed on the client side) or via any VNC client.
 
 ---
 
-[![Chromium Logo](https://images.weserv.nl/?url=raw.githubusercontent.com/imodstyle/docker-chromium/master/img/chromium-icon.png&w=110)](https://www.chromium.org/getting-involved/download-chromium/)[![Chromium](https://images.placeholders.dev/?width=224&height=110&fontFamily=monospace&fontWeight=400&fontSize=52&text=Firefox&bgColor=rgba(0,0,0,0.0)&textColor=rgba(121,121,121,1))](https://www.chromium.org/getting-involved/download-chromium/)
+[![Chromium Logo](https://images.weserv.nl/?url=https://raw.githubusercontent.com/imodstyle/docker-chromium/main/img/chromium_icon.png&w=110)](https://www.chromium.org/getting-involved/download-chromium/)[![Chromium](https://images.placeholders.dev/?width=224&height=110&fontFamily=monospace&fontWeight=400&fontSize=52&text=Chromium&bgColor=rgba(0,0,0,0.0)&textColor=rgba(121,121,121,1))](https://www.chromium.org/getting-involved/download-chromium/)
 
 The Chromium projects include Chromium and Chromium OS, the open-source projects behind the Google Chrome browser and Google Chrome OS, respectively. This site houses the documentation and code related to the Chromium projects and is intended for developers interested in learning about and contributing to the open-source projects.
 
