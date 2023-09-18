@@ -83,9 +83,9 @@ RUN \
     true
 
 # Set public environment variables.
-ENV \
-    FF_OPEN_URL= \
-    FF_KIOSK=0
+#ENV \
+    #FF_OPEN_URL= \
+    #FF_KIOSK=0
 
 # Metadata.
 LABEL \
