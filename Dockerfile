@@ -17,7 +17,7 @@ ARG CHROMIUM_VERSION=121.0.6167.85-r0
 WORKDIR /tmp
 
 # Install Chromium.
-RUN \
+RUN apk upgrade --no-cache --available \
      add-pkg chromium=${CHROMIUM_VERSION}
 
 # Add Chrome as a user
@@ -33,7 +33,7 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/lib/chromium/
 
 # Install extra packages.
-RUN \
+RUN apk upgrade --no-cache --available \
     add-pkg \
         # WebGL support.
         mesa-dri-gallium \
