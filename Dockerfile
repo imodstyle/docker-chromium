@@ -1,25 +1,25 @@
 #
 # Chromium Dockerfile
 #
-# https://github.com/imodstyle/docker-chromeium
+# https://github.com/imodstyle/docker-chromium
 #
 
 # Build the membarrier check tool.
-FROM alpine:3.15 AS membarrier
-WORKDIR /tmp
-COPY membarrier_check.c .
-RUN apk --no-cache add build-base linux-headers
-RUN gcc -static -o membarrier_check membarrier_check.c
-RUN strip membarrier_check
+#FROM alpine:3.15 AS membarrier
+#WORKDIR /tmp
+#COPY membarrier_check.c .
+#RUN apk --no-cache add build-base linux-headers
+#RUN gcc -static -o membarrier_check membarrier_check.c
+#RUN strip membarrier_check
 
 # Pull base image.
-FROM imodstyle/baseimage-gui:alpine-3.18-v4.4.2
+FROM imodstyle/baseimage-gui:alpine-3.19-v4.6.0
 
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
 
 # Define software versions.
-ARG CHROMIUM_VERSION=115.0.5790.170-r0
+ARG CHROMIUM_VERSION=121.0.6167.85-r0
 #ARG PROFILE_CLEANER_VERSION=2.36
 
 # Define software download URLs.
@@ -72,8 +72,8 @@ RUN \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
-COPY rootfs/ /
-COPY --from=membarrier /tmp/membarrier_check /usr/bin/
+#COPY rootfs/ /
+#COPY --from=membarrier /tmp/membarrier_check /usr/bin/
 
 # Set internal environment variables.
 RUN \
@@ -89,7 +89,7 @@ RUN \
 
 # Metadata.
 LABEL \
-      org.label-schema.name="chromeium" \
+      org.label-schema.name="chromium" \
       org.label-schema.description="Docker container for Chromium" \
       org.label-schema.version="${DOCKER_IMAGE_VERSION:-unknown}" \
       org.label-schema.vcs-url="https://github.com/imodstyle/docker-chromium" \
