@@ -17,7 +17,7 @@ ARG CHROMIUM_VERSION=121.0.6167.85-r0
 WORKDIR /tmp
 
 # Install Chromium.
-RUN apk upgrade --no-cache --available \
+RUN \
      add-pkg chromium=${CHROMIUM_VERSION}
 
 # Add Chrome as a user
@@ -33,15 +33,13 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/lib/chromium/
 
 # Install extra packages.
-RUN apk upgrade --no-cache --available \
-    add-pkg \
+RUN \
         # WebGL support.
         mesa-dri-gallium \
         # Icons used by folder/file selection window (when saving as).
         adwaita-icon-theme \
         # A font is needed.
         font-dejavu \
-        font-noto \
         # The following package is used to send key presses to the X process.
         xdotool \
         && \
