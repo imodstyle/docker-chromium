@@ -27,5 +27,5 @@ for PID in "$PIDS"; do
 done
 set -e
 
-/usr/bin/firefox --version
-exec /usr/bin/firefox "$@" >> /config/log/firefox/output.log 2>> /config/log/firefox/error.log
+/usr/bin/chromium-browser --version
+exec /usr/bin/chromium-browser "$@" >> /config/log/chromium-browser/output.log 2>> /config/log/fchromium-browser/error.log
