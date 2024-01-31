@@ -20,22 +20,10 @@ WORKDIR /tmp
 RUN \
      add-pkg chromium=${CHROMIUM_VERSION}
 
-# Add Chrome as a user
-RUN mkdir -p /usr/src/app \
-    && adduser -D chrome \
-    && chown -R chrome:chrome /usr/src/app
-
-# Run Chrome as non-privileged
-USER chrome
-WORKDIR /usr/src/app
-
-ENV CHROME_BIN=/usr/bin/chromium-browser \
-    CHROME_PATH=/usr/lib/chromium/
-
 # Install extra packages.
 RUN \
         # WebGL support.
-        #mesa-dri-gallium \
+        mesa-dri-gallium \
         # Icons used by folder/file selection window (when saving as).
         adwaita-icon-theme \
         # A font is needed.
@@ -51,6 +39,18 @@ RUN \
 RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/imodstyle/docker-chromium/main/img/chromium_icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
+
+# Add Chrome as a user
+RUN mkdir -p /usr/src/app \
+    && adduser -D chrome \
+    && chown -R chrome:chrome /usr/src/app
+
+# Run Chrome as non-privileged
+USER chrome
+WORKDIR /usr/src/app
+
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/lib/chromium/
 
 # Autorun chrome headless
 ENV CHROMIUM_FLAGS="--disable-software-rasterizer --disable-dev-shm-usage"
