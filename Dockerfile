@@ -41,6 +41,13 @@ RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/imodstyle/docker-chromium/main/img/chromium_icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
+# Set internal environment variables.
+RUN \
+    set-cont-env APP_NAME "chromium" && \
+    set-cont-env APP_VERSION "$CHROMIUM_VERSION_VERSION" && \
+    set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
+    true
+
 # Add Chrome as a user
 RUN mkdir -p /usr/src/app \
     && adduser -D chrome \
@@ -56,13 +63,6 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
 # Autorun chrome headless
 ENV CHROMIUM_FLAGS="--disable-software-rasterizer --disable-dev-shm-usage"
 ENTRYPOINT ["chromium-browser"]
-
-# Set internal environment variables.
-RUN \
-    set-cont-env APP_NAME "chromium" && \
-    set-cont-env APP_VERSION "$CHROMIUM_VERSION_VERSION" && \
-    set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
-    true
 
 # Metadata.
 LABEL \
