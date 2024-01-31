@@ -41,8 +41,7 @@ RUN \
         adwaita-icon-theme \
         # A font is needed.
         font-dejavu \
-        ttf-freefont \
-        font-noto-emoji \
+        font-noto \
         # The following package is used to send key presses to the X process.
         xdotool \
         && \
