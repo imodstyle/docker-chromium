@@ -14,7 +14,7 @@ xdotool key "ctrl+q"
 
 for i in $(seq 1 10)
 do
-    if ! ps | grep "/usr/lib/firefox/firefox" | grep -q -v grep
+    if ! ps | grep "/usr/lib/chromium-browser/chromium-browser" | grep -q -v grep
     then
         break
     fi
