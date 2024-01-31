@@ -4,14 +4,6 @@
 # https://github.com/imodstyle/docker-chromium
 #
 
-# Build the membarrier check tool.
-#FROM alpine:3.15 AS membarrier
-#WORKDIR /tmp
-#COPY membarrier_check.c .
-#RUN apk --no-cache add build-base linux-headers
-#RUN gcc -static -o membarrier_check membarrier_check.c
-#RUN strip membarrier_check
-
 # Pull base image.
 FROM imodstyle/baseimage-gui:alpine-3.19-v4.6.0
 
@@ -20,10 +12,6 @@ ARG DOCKER_IMAGE_VERSION=
 
 # Define software versions.
 ARG CHROMIUM_VERSION=121.0.6167.85-r0
-#ARG PROFILE_CLEANER_VERSION=2.36
-
-# Define software download URLs.
-#ARG PROFILE_CLEANER_URL=https://github.com/graysky2/profile-cleaner/raw/v${PROFILE_CLEANER_VERSION}/common/profile-cleaner.in
 
 # Define working directory.
 WORKDIR /tmp
@@ -31,6 +19,18 @@ WORKDIR /tmp
 # Install Chromium.
 RUN \
      add-pkg chromium=${CHROMIUM_VERSION}
+
+# Add Chrome as a user
+RUN mkdir -p /usr/src/app \
+    && adduser -D chrome \
+    && chown -R chrome:chrome /usr/src/app
+
+# Run Chrome as non-privileged
+USER chrome
+WORKDIR /usr/src/app
+
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/lib/chromium/
 
 # Install extra packages.
 RUN \
@@ -41,6 +41,8 @@ RUN \
         adwaita-icon-theme \
         # A font is needed.
         font-dejavu \
+        ttf-freefont \
+        font-noto-emoji \
         # The following package is used to send key presses to the X process.
         xdotool \
         && \
@@ -48,32 +50,14 @@ RUN \
     find /usr/share/icons/Adwaita -type d -mindepth 1 -maxdepth 1 -not -name 16x16 -not -name scalable -exec rm -rf {} ';' && \
     true
 
-# Install profile-cleaner.
-#RUN \
-#    add-pkg --virtual build-dependencies curl && \
-#    curl -# -L -o /usr/bin/profile-cleaner {$PROFILE_CLEANER_URL} && \
-#    sed-patch 's/@VERSION@/'${PROFILE_CLEANER_VERSION}'/' /usr/bin/profile-cleaner && \
-#    chmod +x /usr/bin/profile-cleaner && \
-#    add-pkg \
-#        bash \
-#        file \
-#        coreutils \
-#        bc \
-#        parallel \
-#        sqlite \
-#        && \
-#    # Cleanup.
-#    del-pkg build-dependencies && \
-#    rm -rf /tmp/* /tmp/.[!.]*
-
 # Generate and install favicons.
 RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/imodstyle/docker-chromium/main/img/chromium_icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
-# Add files.
-#COPY rootfs/ /
-#COPY --from=membarrier /tmp/membarrier_check /usr/bin/
+# Autorun chrome headless
+ENV CHROMIUM_FLAGS="--disable-software-rasterizer --disable-dev-shm-usage"
+ENTRYPOINT ["chromium-browser"]
 
 # Set internal environment variables.
 RUN \
