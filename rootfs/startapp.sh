@@ -16,9 +16,9 @@ notify() {
 }
 
 # Verify support for membarrier.
-if ! /usr/bin/membarrier_check 2>/dev/null; then
-   notify "$APP_NAME requires the membarrier system call." "$APP_NAME is likely to crash because it requires the membarrier system call.  See the documentation of this Docker container to find out how this system call can be allowed." "WARNING"
-fi
+#if ! /usr/bin/membarrier_check 2>/dev/null; then
+#   notify "$APP_NAME requires the membarrier system call." "$APP_NAME is likely to crash because it requires the membarrier system call.  See the documentation of this Docker container to find out how this system call can be allowed." "WARNING"
+#fi
 
 # Wait for all PIDs to terminate.
 set +e
@@ -28,4 +28,4 @@ done
 set -e
 
 /usr/bin/chromium-browser --version
-exec /usr/bin/chromium-browser "$@" >> /config/log/chromium-browser/output.log 2>> /config/log/fchromium-browser/error.log
+exec /usr/bin/chromium-browser "$@" >> /config/log/chromium-browser/output.log 2>> /config/log/chromium-browser/error.log

@@ -77,15 +77,10 @@ RUN \
 
 # Set internal environment variables.
 RUN \
-    set-cont-env APP_NAME "Chromium" && \
+    set-cont-env APP_NAME "chromium" && \
     set-cont-env APP_VERSION "$CHROMIUM_VERSION_VERSION" && \
     set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
     true
-
-# Set public environment variables.
-#ENV \
-    #FF_OPEN_URL= \
-    #FF_KIOSK=0
 
 # Metadata.
 LABEL \
