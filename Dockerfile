@@ -35,7 +35,7 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
 # Install extra packages.
 RUN \
         # WebGL support.
-        mesa-dri-gallium \
+        #mesa-dri-gallium \
         # Icons used by folder/file selection window (when saving as).
         adwaita-icon-theme \
         # A font is needed.
